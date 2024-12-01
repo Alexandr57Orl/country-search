@@ -13,8 +13,6 @@ export const Details = () => {
   const push = (path) => navigate(path);
   const [country, setCountry] = useState(null);
 
-  console.log(country);
-
   useEffect(() => {
     axios.get(searchByCountry(name)).then(({ data }) => setCountry(data[0]));
   }, [name]);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Controls } from "../components/Controls";
 import { List } from "../components/List";
 import { Card } from "../components/Card";
-import BlogItem from "../components/Skeleton";
+import ImageGrid from "../components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import { useGetCountriesQuery } from "../services/SliceApi";
 
@@ -15,7 +15,7 @@ export const Home = () => {
 
   const { data: countries = [], isLoading, isError } = useGetCountriesQuery();
   if (isLoading) {
-    return [...new Array(7)].map(() => <BlogItem key={uuidv4()} />);
+    return [...new Array(7)].map(() => <ImageGrid key={uuidv4()} />);
   }
   if (isError) return <div>Error fetching countries.</div>;
 

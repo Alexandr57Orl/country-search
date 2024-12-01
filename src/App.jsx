@@ -1,6 +1,6 @@
-import { Routes, Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { NotFound } from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import { Details } from "./pages/Details";
 import { Header } from "./components/Header";
 import { Main } from "./components/Main";

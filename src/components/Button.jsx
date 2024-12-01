@@ -6,6 +6,8 @@ export const Button = styled.button`
   box-shadow: var(--shadow);
   line-height: 2.5;
   border-radius: var(--radii);
+  color: var(--colors-text);
+  text-decoration: none;
 
   border: none;
   display: flex;
