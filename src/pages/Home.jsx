@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Controls } from "../components/Controls";
 import { List } from "../components/List";
 import { Card } from "../components/Card";
-import { ALL_COUNTRIES } from "../config";
+import BlogItem from "../components/Skeleton";
 import { useNavigate } from "react-router-dom";
+import { useGetCountriesQuery } from "../services/SliceApi";
+
+import { v4 as uuidv4 } from "uuid";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const [countries, setCountries] = useState([]);
+
   const [filteredCountries, setFilteredCountries] = useState([]);
+
+  const { data: countries = [], isLoading, isError } = useGetCountriesQuery();
+  if (isLoading) {
+    return [...new Array(7)].map(() => <BlogItem key={uuidv4()} />);
+  }
+  if (isError) return <div>Error fetching countries.</div>;
 
   const stepCard = (c) => {
     navigate(`/details/${c.name}`);
@@ -26,21 +35,6 @@ export const Home = () => {
 
     setFilteredCountries(filteredData);
   };
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch(ALL_COUNTRIES);
-        const data = await response.json();
-        setCountries(data);
-        setFilteredCountries(data);
-      } catch (error) {
-        console.error("Error fetching countries:", error);
-      }
-    };
-
-    fetchCountries();
-  }, []); // Пустой массив зависимостей
 
   return (
     <>
