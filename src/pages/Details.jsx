@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { searchByCountry } from "../config";
-import { Button } from "../components/Button";
-import { Info } from "../components/Info";
+import { Button } from "../components/Button.tsx";
+import { Info } from "../components/Info.tsx";
 
-export const Details = () => {
+const Details = () => {
   const { name } = useParams();
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -26,3 +26,5 @@ export const Details = () => {
     </div>
   );
 };
+
+export default Details;

@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import { Details } from "./pages/Details";
-import { Header } from "./components/Header";
-import { Main } from "./components/Main";
+import Details from "./pages/Details";
+import { Header } from "./components/Header.tsx";
+import { Main } from "./components/Main.tsx";
 import { useState } from "react";
 
 export function App() {

@@ -21,6 +21,6 @@ const Wrapper = styled.section`
   }
 `;
 
-export const List = ({ children }) => {
+export const List = ({ children }: { children: React.ReactNode }) => {
   return <Wrapper>{children}</Wrapper>;
 };

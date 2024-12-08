@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Container } from "./Container";
+import { Container } from "./Container.tsx";
+import { Tooltip } from "./Tooltip.tsx";
 import { useState, useEffect } from "react";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -44,15 +45,20 @@ export const Header = () => {
           <Link to="/">
             <StyledTitle>Where is the world?</StyledTitle>
           </Link>
-          <StyledModeSwitch onClick={toggleTheme}>
-            {theme === "light" ? (
-              <IoMoonOutline size="14px" />
-            ) : (
-              <IoMoon size="14px" />
-            )}
+          <Tooltip
+            text={`Сменить на ${theme === "light" ? "темную" : "светлую"} тему`}
+            visible={false}
+          >
+            <StyledModeSwitch onClick={toggleTheme}>
+              {theme === "light" ? (
+                <IoMoonOutline size="14px" />
+              ) : (
+                <IoMoon size="14px" />
+              )}
 
-            <span style={{ marginLeft: "0.75rem" }}> {theme} theme</span>
-          </StyledModeSwitch>
+              <span style={{ marginLeft: "0.75rem" }}> {theme} theme</span>
+            </StyledModeSwitch>
+          </Tooltip>
         </StyledWrapper>
       </Container>
     </StyledHeader>

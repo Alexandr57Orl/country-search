@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Controls } from "../components/Controls";
-import { List } from "../components/List";
-import { Card } from "../components/Card";
+import { List } from "../components/List.tsx";
+import { Card } from "../components/Card.tsx";
 import ImageGrid from "../components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import { useGetCountriesQuery } from "../services/SliceApi";

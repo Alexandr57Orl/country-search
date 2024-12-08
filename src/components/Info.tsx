@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import React from "react";
 import { filterByCode } from "../config";
 
+// Стили компонентов
 const Wrapper = styled.section`
   margin-top: 3rem;
   width: 100%;
@@ -15,6 +17,7 @@ const Wrapper = styled.section`
     align-items: center;
     gap: 5rem;
   }
+
   @media (min-width: 1024px) {
     grid-template-columns: minmax(400px, 600px) 1fr;
   }
@@ -23,8 +26,7 @@ const Wrapper = styled.section`
 const InfoImage = styled.img`
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto; // Изменено на auto для правильного отображения
 `;
 
 const InfoTitle = styled.h1`
@@ -35,7 +37,6 @@ const InfoTitle = styled.h1`
 const ListGroup = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 2rem;
 
   @media (min-width: 1024px) {
@@ -63,6 +64,7 @@ const Meta = styled.div`
   display: flex;
   gap: 1.5rem;
   flex-direction: column;
+
   align-items: flex-start;
 
   & > b {
@@ -77,19 +79,51 @@ const Meta = styled.div`
 
 const TagGroup = styled.div`
   display: flex;
+
   gap: 1rem;
+
   flex-wrap: wrap;
 `;
 
 const Tag = styled.span`
-  padding: 0 1rem;
+  padding: 0.5rem; // Увеличен отступ для лучшего восприятия
   background-color: var(--colors-ui-base);
+
   box-shadow: var(--shadow);
+
   line-height: 1.5;
+
   cursor: pointer;
 `;
 
-export const Info = (props) => {
+// Интерфейсы для валют и языков
+interface Currency {
+  name: string;
+  symbol?: string; // symbol может быть необязательным
+}
+
+interface Language {
+  name: string;
+}
+
+// Основной интерфейс для пропсов компонента Info
+interface IInfoProps {
+  name: string;
+  nativeName?: string; // nativeName может быть необязательным
+  flag?: string; // flag может быть необязательным
+  capital?: string; // capital может быть необязательным
+  population?: number; // population может быть необязательным
+  region?: string; // region может быть необязательным
+  subregion?: string; // subregion может быть необязательным
+  topLevelDomain?: string[]; // topLevelDomain может быть необязательным
+  currencies?: Currency[]; // currencies может быть необязательным
+  languages?: Language[]; // languages может быть необязательным
+  borders?: string[]; // borders может быть необязательным
+  push?: (path: string) => void; // push - функция навигации
+}
+
+// Компонент Info
+export const Info = (props: IInfoProps) => {
   const {
     name,
     nativeName,
@@ -98,26 +132,32 @@ export const Info = (props) => {
     population,
     region,
     subregion,
-    topLevelDomain,
+    topLevelDomain = [],
     currencies = [],
     languages = [],
     borders = [],
     push,
   } = props;
 
-  const [neighbors, setNeighbors] = useState([]);
+  const [neighbors, setNeighbors] = useState<string[]>([]); // Указываем тип для neighbors
 
   useEffect(() => {
-    if (borders.length)
+    if (borders.length) {
       axios
         .get(filterByCode(borders))
-        .then(({ data }) => setNeighbors(data.map((c) => c.name)));
+        .then(({ data }) =>
+          setNeighbors(data.map((c: { name: string }) => c.name))
+        )
+        .catch((error) =>
+          console.error("Error fetching border countries:", error)
+        ); // Обработка ошибок
+    }
   }, [borders]);
 
   return (
     <Wrapper>
-      <InfoImage src={flag} alt={name} />
-
+      {flag && <InfoImage src={flag} alt={name} />}{" "}
+      {/* Проверка на наличие флага */}
       <div>
         <InfoTitle>{name}</InfoTitle>
         <ListGroup>
@@ -126,7 +166,7 @@ export const Info = (props) => {
               <b>Native Name:</b> {nativeName}
             </ListItem>
             <ListItem>
-              <b>Population</b> {population}
+              <b>Population:</b> {population}
             </ListItem>
             <ListItem>
               <b>Region:</b> {region}
@@ -140,33 +180,33 @@ export const Info = (props) => {
           </List>
           <List>
             <ListItem>
-              <b>Top Level Domain</b>{" "}
+              <b>Top Level Domain:</b>{" "}
               {topLevelDomain.map((d) => (
                 <span key={d}>{d}</span>
               ))}
             </ListItem>
             <ListItem>
-              <b>Currency</b>{" "}
+              <b>Currencies:</b>{" "}
               {currencies.map((c) => (
-                <span key={c.code}>{c.name} </span>
+                <span key={c.name}>{c.name} </span> // Используйте уникальный ключ
               ))}
             </ListItem>
             <ListItem>
-              <b>Top Level Domain</b>{" "}
+              <b>Languages:</b>{" "}
               {languages.map((l) => (
-                <span key={l.name}>{l.name}</span>
+                <span key={l.name}>{l.name}</span> // Используйте уникальный ключ
               ))}
             </ListItem>
           </List>
         </ListGroup>
         <Meta>
-          <b>Border Countries</b>
+          <b>Border Countries:</b>
           {!borders.length ? (
-            <span>There is no border countries</span>
+            <span>There are no border countries</span>
           ) : (
             <TagGroup>
               {neighbors.map((b) => (
-                <Tag key={b} onClick={() => push(`/country/${b}`)}>
+                <Tag key={b} onClick={() => push && push(`/country/${b}`)}>
                   {b}
                 </Tag>
               ))}
