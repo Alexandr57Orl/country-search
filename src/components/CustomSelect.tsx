@@ -1,13 +1,19 @@
 import styled from "styled-components";
-import Select from "react-select";
+import Select, { Props as SelectProps } from "react-select";
 
-export const CustomSelect = styled(Select).attrs({
+// Определяем интерфейс для пропсов
+interface CustomSelectProps extends SelectProps {
+  width?: string; // Добавляем свойство width
+}
+
+// Создаем кастомный селект с использованием styled-components
+export const CustomSelect = styled(Select).attrs<CustomSelectProps>({
   styles: {
     control: (provided) => ({
       ...provided,
       backgroundColor: `var(--colors-ui-base)`,
       color: `var(--colors-text)`,
-      borderRadius: `var(--radii)`, // Исправлено на borderRadius
+      borderRadius: `var(--radii)`,
       padding: `0.25rem`,
       border: `none`,
       boxShadow: `var(--shadow)`,
@@ -31,7 +37,7 @@ export const CustomSelect = styled(Select).attrs({
       backgroundColor: `var(--colors-ui-base)`,
     }),
   },
-})`
+})<CustomSelectProps>`
   width: ${({ width }) => width || "200px"};
   font-family: var(--family);
 

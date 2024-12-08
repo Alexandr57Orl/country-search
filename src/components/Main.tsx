@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Container } from "./Container";
+import { Container } from "./Container.tsx";
 
 const Wrapper = styled.main`
   padding: 2rem 0;
@@ -9,7 +9,7 @@ const Wrapper = styled.main`
   }
 `;
 
-export const Main = ({ children }) => {
+export const Main = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <Container>{children}</Container>

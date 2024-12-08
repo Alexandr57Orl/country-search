@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Tooltip } from "./Tooltip.tsx";
 
 const Wrapper = styled.article`
   border-radius: var(--radii);
@@ -41,20 +42,30 @@ const CardItem = styled.li`
   }
 `;
 
-export const Card = ({ img, name, info = [], onClick }) => {
+type CardProps = {
+  img: string;
+  name: string;
+  info: { title: string; description: string }[];
+  onClick: () => void;
+  visible: boolean;
+};
+
+export const Card = ({ img, name, info = [], onClick }: CardProps) => {
   return (
-    <Wrapper onClick={onClick}>
-      <CardImage src={img} alt="name" />
-      <CardBody>
-        <CardTitle>{name}</CardTitle>
-        <CartList>
-          {info.map((item) => (
-            <CardItem key={item.title}>
-              <b>{item.title}:</b> {item.description}
-            </CardItem>
-          ))}
-        </CartList>
-      </CardBody>
-    </Wrapper>
+    <Tooltip text={`Открыть карточку ${name}`} visible={false}>
+      <Wrapper onClick={onClick}>
+        <CardImage src={img} alt="name" />
+        <CardBody>
+          <CardTitle>{name}</CardTitle>
+          <CartList>
+            {info.map((item) => (
+              <CardItem key={item.title}>
+                <b>{item.title}:</b> {item.description}
+              </CardItem>
+            ))}
+          </CartList>
+        </CardBody>
+      </Wrapper>
+    </Tooltip>
   );
 };

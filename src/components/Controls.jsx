@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Search } from "./Search";
-import { CustomSelect } from "./CustomSelect";
+import { Search } from "./Search.jsx";
+import { CustomSelect } from "./CustomSelect.tsx";
 import styled from "styled-components";
 
 const options = [

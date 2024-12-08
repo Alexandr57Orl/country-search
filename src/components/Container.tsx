@@ -8,6 +8,10 @@ export const StyledContainer = styled.div`
   padding: 0 2rem;
 `;
 
-export const Container = (props) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+export const Container = (props: Props) => {
   return <StyledContainer {...props} />;
 };
