@@ -1,13 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "react",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": true
+    "target": "es6", // Измените на es6 для современных возможностей JavaScript
+    "module": "esnext", // Используйте esnext для поддержки современных модулей
+    "jsx": "react-jsx", // Используйте react-jsx для новой трансформации JSX (React 17+)
+    "strict": true, // Включает строгую типизацию
+    "esModuleInterop": true, // Позволяет использовать синтаксис импорта ES6
+    "skipLibCheck": true, // Пропускает проверку типов в библиотеках, ускоряя компиляцию
+    "forceConsistentCasingInFileNames": true, // Обеспечивает согласованность регистров в именах файлов
+    "resolveJsonModule": true, // Позволяет импортировать JSON файлы как модули
+    "noImplicitAny": true, // Запрещает использование неявного типа any
+    "moduleResolution": "node", // Указывает метод разрешения модулей (Node.js)
+    "baseUrl": "./src", // Устанавливает базовый путь для относительных импортов
+    "paths": {
+      // Настройка путей для упрощения импортов
+      "*": ["*", "./*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

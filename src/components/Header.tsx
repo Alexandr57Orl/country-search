@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Container } from "./Container.tsx";
-import { Tooltip } from "./Tooltip.tsx";
+import { Container } from "./Container";
+import { Tooltip } from "./Tooltip";
 import { useState, useEffect } from "react";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";

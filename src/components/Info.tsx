@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import React from "react";
+// @ts-ignore
 import { filterByCode } from "../config";
 
 // Стили компонентов
