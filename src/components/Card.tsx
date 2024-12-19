@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Tooltip } from "./Tooltip.tsx";
+import { Tooltip } from "./Tooltip";
 
 const Wrapper = styled.article`
   border-radius: var(--radii);
